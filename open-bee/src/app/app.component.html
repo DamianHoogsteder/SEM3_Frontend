@@ -4,8 +4,8 @@
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                 <ul class="nav col-12 col-lg-8  mb-2 justify-content-left mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Marketplace</a></li>
+                <li><a routerLink="/home" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a routerLink="/markets" class="nav-link px-2 text-white">Marketplace</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Sell</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 </ul>
@@ -20,5 +20,4 @@
             </div>       
         </div>
     </header>
-
-<app-markets></app-markets>
+<router-outlet></router-outlet>
