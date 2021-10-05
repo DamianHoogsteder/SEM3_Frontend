@@ -4,10 +4,10 @@ import { MarketService } from '../market.service';
 
 @Component({
   selector: 'app-markets',
-  templateUrl: './markets.component.html',
-  styleUrls: ['./markets.component.css']
+  templateUrl: './marketdetails.component.html',
+  styleUrls: ['./marketdetails.component.css']
 })
-export class MarketsComponent implements OnInit {
+export class MarketdetailsComponent implements OnInit {
 
   markets: Market[] = [];
 
