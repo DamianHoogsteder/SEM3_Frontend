@@ -7,12 +7,14 @@ import { MarketsComponent } from './markets/markets.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MarketDetailComponent } from './market-detail/market-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MarketsComponent,
-    DashboardComponent
+    DashboardComponent,
+    MarketDetailComponent
   ],
   imports: [
     BrowserModule,

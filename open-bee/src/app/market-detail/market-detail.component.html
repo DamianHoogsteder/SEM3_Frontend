@@ -1,0 +1,11 @@
+
+<div *ngIf="market; else elseBlock">
+    {{market.name}}
+    <div *ngFor="let item of market.items">
+        <p>
+            {{item.id}}
+        </p>
+    </div>
+</div>
+
+<ng-template #elseBlock>foeijknuw</ng-template>

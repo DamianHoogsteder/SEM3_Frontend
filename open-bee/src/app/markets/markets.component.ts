@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Market } from '../market';
 import { MarketService } from '../market.service';
-import { Market } from 'src/market';
 
 @Component({
   selector: 'app-markets',

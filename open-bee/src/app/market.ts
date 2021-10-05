@@ -1,7 +1,11 @@
+import { Item } from "./item";
+
 export interface Market
 {
-    id: number;
-    name: string;
     description: string;
+    id: number;
+    items: Item[];
+    name: string;
     price: number;
+
 }

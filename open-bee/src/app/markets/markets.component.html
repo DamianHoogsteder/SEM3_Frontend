@@ -12,7 +12,9 @@
         <h2>{{market.name}}</h2>
         <p>{{market.description}}</p>
         </div>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" routerLink="/detail/{{market.id}}">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
+
+  <router-outlet></router-outlet>
