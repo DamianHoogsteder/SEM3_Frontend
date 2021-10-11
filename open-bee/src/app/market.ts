@@ -7,5 +7,6 @@ export interface Market
     items: Item[];
     name: string;
     price: number;
+    logo: string;
 
 }

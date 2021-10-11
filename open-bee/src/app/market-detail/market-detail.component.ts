@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Item } from '../item';
 import { Market } from '../market';
 import { MarketService } from '../market.service';
 
@@ -10,7 +11,9 @@ import { MarketService } from '../market.service';
 })
 export class MarketDetailComponent implements OnInit {
 
-  market?: Market;
+  @Input() market?: Market;
+  items: Item[] = [];
+  markets: Market[] = [];
 
   constructor(
     private marketService : MarketService,
@@ -19,12 +22,17 @@ export class MarketDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMarkets()
+    this.getItems()
   }
 
   getMarkets() : void
   {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.marketService.getMarketItems(id).subscribe(markets => this.market = markets);
-    console.log(this.market);
+    this.marketService.getMarketItems(id).subscribe((markets: any) => this.markets = markets);
+  }
+
+  getItems() : void
+  {
+    this.marketService.getItems().subscribe((item: any) => this.items = item);
   }
 }
