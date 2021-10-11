@@ -6,7 +6,7 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div *ngFor="let market of markets" class="col-lg-4 text-center">
-        <img class="bd-placeholder-img" src="https://gyazo.com/b90ca49d3b3b77c1fcdb57b7e644a21f" alt="logo" width="140px" height="140px"> 
+        <img class="bd-placeholder-img" src="{{market.logo}}.png" alt="logo" width="140px" height="140px"> 
         <div>
         <h2>{{market.name}}</h2>
         <p>{{market.description}}</p>
