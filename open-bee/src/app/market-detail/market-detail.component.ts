@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from '../item';
 import { Market } from '../market';
-import { MarketService } from '../market.service';
+import { MarketService } from '../MarketService/market.service';
 
 @Component({
   selector: 'app-market-detail',

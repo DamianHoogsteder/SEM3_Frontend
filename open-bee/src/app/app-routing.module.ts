@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MarketDetailComponent } from './market-detail/market-detail.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'markets', component: MarketsComponent},
   {path: 'home', component: DashboardComponent},
   {path: 'detail/:id', component: MarketDetailComponent}
