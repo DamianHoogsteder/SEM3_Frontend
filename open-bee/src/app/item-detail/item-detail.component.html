@@ -1,0 +1,25 @@
+<div *ngIf="item">
+    <div class="row bg-dark">
+        <div style="height: 100px;"></div>
+    </div>
+    <div class="row bg-dark">
+        <div class="text-end offset-1 col-5 glass">
+            <img width="100%" height="500px" src="{{item.logo}}.png" alt="ItemImg" style="object-fit: contain;">
+        </div>
+        <div class="offset-1 col-3 text-white">
+            <h2>{{item.name}}</h2>
+            <div class="text-muted">
+                <h3>$ {{item.price}}</h3>
+            </div>
+            <div class="text-muted">
+                <h3>{{item.description}}</h3>
+            </div> 
+            <br /><br /><br /><br />                
+                <a class="btn btn-warning">Place bid</a>
+                <a class="btn btn-danger">Offer trade</a>
+        </div>
+    </div>
+    <div class="row bg-dark">
+        <div style="height: 50px;"></div>
+    </div>
+</div>

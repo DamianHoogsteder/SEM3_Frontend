@@ -16,6 +16,7 @@ export class MarketService {
   private marketsUrl = this.apiUrl + "Market"
   private itemUrl = this.apiUrl + "Market/:id"
   private items = this.apiUrl + "items"
+  private itemById = this.apiUrl + "items"
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +33,10 @@ export class MarketService {
   getItems() : Observable<Item[]>
   {
     return this.http.get<Item[]>(this.items)
+  }
+
+  getItemById(id: number) : Observable<Item>
+  {
+    return this.http.get<Item>(`${this.itemById}/${id}/`)
   }
 }
