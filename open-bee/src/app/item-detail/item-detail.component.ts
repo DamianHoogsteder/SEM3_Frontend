@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Item } from '../item';
 import { MarketService } from '../MarketService/market.service';
 import { SignalrService } from '../signalr.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-item-detail',
@@ -14,11 +15,13 @@ export class ItemDetailComponent implements OnInit {
 
   item?: Item;
   tradeOffer?: String;
+  closeResult = '';
 
   constructor(
     private marketService : MarketService,
     private route: ActivatedRoute,
-    private signalrService: SignalrService
+    private signalrService: SignalrService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -34,16 +37,30 @@ export class ItemDetailComponent implements OnInit {
     this.marketService.getItemById(id).subscribe(items => this.item = items);
   }
 
-  async sendTradeOffer()
+  sendTradeOffer()
   {
-    let promise = new Promise((resolve, reject) => {
       setTimeout(() => {
+        this.signalrService.askServerListener();
         this.signalrService.askServer();
-        resolve(this.signalrService.askServerListener());
       }, 2000); 
-      this.tradeOffer = this.signalrService.websocketmessage;
-    })
-    return promise;
+  }
+
+  openModal(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
   
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 }
