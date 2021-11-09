@@ -13,8 +13,8 @@ export class MarketService {
 
   private apiUrl = environment.API_URL;
 
-  private marketsUrl = this.apiUrl + "Market"
-  private itemUrl = this.apiUrl + "Market/:id"
+  private marketsUrl = this.apiUrl + "Markets"
+  private itemUrl = this.apiUrl + "Markets/:id"
   private items = this.apiUrl + "items"
   private itemById = this.apiUrl + "items"
 
