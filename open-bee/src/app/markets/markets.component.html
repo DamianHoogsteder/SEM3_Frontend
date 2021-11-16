@@ -6,13 +6,15 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div *ngFor="let market of markets" class="col-lg-4 text-center">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
+        <img class="bd-placeholder-img" src="{{market.logo}}.png" alt="logo" width="140px" height="140px"> 
         <div>
         <h2>{{market.name}}</h2>
         <p>{{market.description}}</p>
         </div>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+
+            <p><a class="btn btn-secondary" routerLink="/detail/{{market.id}}">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
+
+  <router-outlet></router-outlet>
