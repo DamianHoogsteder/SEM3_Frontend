@@ -17,6 +17,7 @@ export class MarketService {
   private itemUrl = this.apiUrl + "Markets/:id"
   private items = this.apiUrl + "items"
   private itemById = this.apiUrl + "items"
+  private addItem = this.apiUrl + "items/sell"
 
   constructor(private http: HttpClient) { }
 
@@ -38,5 +39,14 @@ export class MarketService {
   getItemById(id: number) : Observable<Item>
   {
     return this.http.get<Item>(`${this.itemById}/${id}/`)
+  }
+
+  public addItems(item: Item) : void
+  {
+    this.http.post(this.addItem, item).toPromise().then(data =>
+      {
+        console.log(data);
+
+      })
   }
 }

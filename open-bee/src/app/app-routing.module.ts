@@ -5,13 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MarketDetailComponent } from './market-detail/market-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { YourInventoryComponent } from './your-inventory/your-inventory.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'markets', component: MarketsComponent},
   {path: 'home', component: DashboardComponent},
   {path: 'detail/:id', component: MarketDetailComponent},
-  {path: 'item/:id', component: ItemDetailComponent}
+  {path: 'item/:id', component: ItemDetailComponent},
+  {path: 'sell', component: YourInventoryComponent}
 ];
 
 @NgModule({
