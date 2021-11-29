@@ -11,6 +11,9 @@ import { MarketDetailComponent } from './market-detail/market-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { YourInventoryComponent } from './your-inventory/your-inventory.component';
 import { FormsModule } from '@angular/forms';
+import { RegistrationComponent } from './registration/registration.component';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     MarketDetailComponent,
     ItemDetailComponent,
-    YourInventoryComponent
+    YourInventoryComponent,
+    RegistrationComponent,
+    UserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

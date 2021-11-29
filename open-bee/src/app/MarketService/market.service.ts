@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 export class MarketService {
 
   private apiUrl = environment.API_URL;
-
   private marketsUrl = this.apiUrl + "Markets"
   private itemUrl = this.apiUrl + "Markets/:id"
   private items = this.apiUrl + "items"
