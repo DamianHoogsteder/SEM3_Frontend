@@ -45,7 +45,6 @@ export class MarketService {
     this.http.post(this.addItem, item).toPromise().then(data =>
       {
         console.log(data);
-
       })
   }
 }

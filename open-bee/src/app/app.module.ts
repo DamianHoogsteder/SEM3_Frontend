@@ -25,7 +25,7 @@ import { LoginComponent } from './user/login/login.component';
     YourInventoryComponent,
     RegistrationComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
