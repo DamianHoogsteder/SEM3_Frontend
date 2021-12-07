@@ -1,4 +1,7 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { flattenDiagnosticMessageText } from 'typescript';
 import { SignalrService } from './signalr.service';
 
 @Component({
@@ -9,8 +12,11 @@ import { SignalrService } from './signalr.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'open-bee';
 
+ 
+
   constructor(
-    public signalrService: SignalrService
+    public signalrService: SignalrService,
+    private router : Router
   )
   {}
 
@@ -22,7 +28,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.signalrService.askServerListener();
     this.signalrService.askServer();
   }, 2000);
-
   }
 
   ngOnDestroy()

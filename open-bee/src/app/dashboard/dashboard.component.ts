@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navbar: NavBarComponent) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('token') != null)
+    {
+      this.navbar.loggedIn = true;
+    }
   }
 
 }

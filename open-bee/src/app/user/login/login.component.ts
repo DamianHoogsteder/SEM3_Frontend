@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/Services/user.service';
 import { User } from 'src/app/user';
 
@@ -11,15 +12,30 @@ import { User } from 'src/app/user';
 export class LoginComponent implements OnInit {
   
   public currentUser: User = {};
+  
   constructor(private userService : UserService,
     private router: Router) { }
 
   ngOnInit(): void {
+    //If user is logged this rejects them from going to login page through url.
+    if(localStorage.getItem('token') != null)
+    {
+      this.router.navigateByUrl('/home');
+    }
   }
 
-  public login(user: User) : void
+  login(user: User)
   {
-    console.log(user)
-    this.userService.Login(user)
+    this.userService.Login(user).subscribe(
+      (res: any) =>
+      {
+        localStorage.setItem('token', res.token);
+        this.router.navigateByUrl('/home');
+      },
+      err => 
+      {
+        console.log(err);
+      }
+    );
   }
 }

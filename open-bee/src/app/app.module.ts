@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LoginComponent } from './user/login/login.component';
     RegistrationComponent,
     UserComponent,
     LoginComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,

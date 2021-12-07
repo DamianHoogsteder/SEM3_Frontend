@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
 import { Market } from '../market';
 import { MarketService } from '../MarketService/market.service';
@@ -22,7 +22,8 @@ export class YourInventoryComponent implements OnInit {
   constructor(
     private marketService : MarketService,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router : Router
     ) { }
 
   ngOnInit(): void {

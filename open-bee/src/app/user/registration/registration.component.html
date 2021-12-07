@@ -12,9 +12,9 @@
                 <label>Password</label>
                 <input required type="password" placeholder="password" class="form-control" name="Password" [ngModel]="newUser.Password">
             </div>
-            <button class="btn btn-warning" type="submit" (click)="register(itemForm.value)">Add to inventory</button>
+            <button class="btn btn-warning" type="submit" (click)="register(itemForm.value)" routerLink="/Login">Add to inventory</button>
             </form>
         </div>
     </div>
 </div>
-
+<router-outlet></router-outlet>
