@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../user';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -29,11 +29,19 @@ export class UserService {
 
   public Login(user : User) : Observable<User>
   {
-   return this.http.post(this.loginUrl, user)
+   return this.http.post(this.loginUrl, user);
   }
 
   public FetchUserDataOnLogin(data: any)
   {
-    this.http.get<User>(this.profileUrl)
+    var tokenheader = new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
+    return this.http.get<User>(this.profileUrl,{headers : tokenheader});  
   }
+
+  public GetUserProfile()
+  {
+    var tokenheader = new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
+    return this.http.get<User>(this.profileUrl,{headers : tokenheader});  
+  }
+
 }
