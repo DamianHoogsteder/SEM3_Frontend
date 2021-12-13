@@ -5,6 +5,7 @@ import { Market } from '../market';
 import { MarketService } from '../MarketService/market.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ItemDetailComponent } from '../item-detail/item-detail.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-your-inventory',
@@ -18,6 +19,7 @@ export class YourInventoryComponent implements OnInit {
   public markets: Market[] = [];
   public closeResult = '';
   public newItem: Item = {};
+  private userId: any;
 
   constructor(
     private marketService : MarketService,
@@ -28,19 +30,23 @@ export class YourInventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMarkets()
-    this.getItems()
+    this.marketService.getItemsByUserId().subscribe(
+      res =>{
+        this.items = res;
+        console.log(this.userId)
+      },
+      err =>{
+        console.log(err);
+      },
+    );
   }
 
   getMarkets() : void
   {
-    const id = 1;
-    this.marketService.getMarketItems(id).subscribe((markets: any) => this.markets = markets);
+    //const id = 1;
+    //this.marketService.getMarketItems(id).subscribe((markets: any) => this.markets = markets);
   }
 
-  getItems() : void
-  {
-    this.marketService.getItems().subscribe((item: any) => this.items = item);
-  }
 
   addItem(item: Item) : void
   {

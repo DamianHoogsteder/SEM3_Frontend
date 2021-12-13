@@ -17,7 +17,6 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.userService.GetUserProfile().subscribe(
       res =>{
-        
         this.userDetails = res;
         console.log(this.userDetails)
       },

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Market } from '../market';
@@ -15,6 +15,7 @@ export class MarketService {
   private marketsUrl = this.apiUrl + "Markets"
   private itemUrl = this.apiUrl + "Markets/:id"
   private items = this.apiUrl + "items"
+  private itemsByUser = this.apiUrl + "items/user"
   private itemById = this.apiUrl + "items"
   private addItem = this.apiUrl + "items/sell"
 
@@ -33,6 +34,12 @@ export class MarketService {
   getItems() : Observable<Item[]>
   {
     return this.http.get<Item[]>(this.items)
+  }
+
+  getItemsByUserId() : Observable<Item[]>
+  {
+    var tokenheader = new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
+    return this.http.get<Item[]>(this.itemsByUser, {headers : tokenheader});
   }
 
   getItemById(id: number) : Observable<Item>
