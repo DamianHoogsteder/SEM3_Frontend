@@ -14,8 +14,10 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class ItemDetailComponent implements OnInit {
 
   item?: Item;
+  items: Item[] = [];
   tradeOffer?: String;
   closeResult = '';
+  userId: any;
 
   constructor(
     private marketService : MarketService,
@@ -25,20 +27,34 @@ export class ItemDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
     this.getItemById()
+    this.getUserInvetory()
+    this.signalrService.startConnection()
   }
 
   
+  getUserInvetory() : void
+  {
+    this.marketService.getItemsByUserId().subscribe(
+      res =>{
+        this.items = res;
+        console.log(this.userId)
+      },
+      err =>{
+        console.log(err);
+      },
+    );
+  }
+
   getItemById() : void
   {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-
     this.marketService.getItemById(id).subscribe(items => this.item = items);
   }
 
-  sendTradeOffer()
+  sendTradeOffer(groupName: string)
   {
+    this.signalrService.joinGroup(groupName);
       setTimeout(() => {
         this.signalrService.askServerListener();
         this.signalrService.askServer();

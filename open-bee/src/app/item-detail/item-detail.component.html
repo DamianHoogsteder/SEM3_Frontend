@@ -16,7 +16,7 @@
             </div> 
             <br /><br /><br /><br />                
             <button class="btn btn-warning" (click)="openModal(content)">Place a bid</button>
-                <a class="btn btn-danger" (click)="sendTradeOffer()">Offer trade</a>
+                <a class="btn btn-danger" (click)="sendTradeOffer('fhi')">Offer trade</a>
                 <h3>{{tradeOffer}}</h3>
         </div>
     </div>
@@ -37,9 +37,29 @@
         <div class="form-group">
           <label for="dateOfBirth">Your inventory</label>
           <div class="input-group">
+            <div class="row py-2">
+              <div *ngFor="let item of items" class="col-lg-4 py-2">
+                <div class="card h-100 w-100 shadow-sm bg-dark" >
+                  <img class="card-img-top align-items-center" src="{{item.logo}}.png" alt="logo" style="object-fit: contain;">
+      
+              <div class="card-body">
+                  <p class="card-text text-white">{{item.name}}</p>
+                  <p class="card-text text-white-50 mb-0">{{item.description}}</p>
+                  <p class="card-text text-white-50 mb-0">$ {{item.price}}</p>
+                  <br />
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" (click)="sendTradeOffer('groep1')" class="btn btn-sm btn-outline-secondary text-white">Offer</button>
+                    </div>
+                  </div>
+            </div>
           </div>
         </div>
-      </form>
+      </div>
+            </div>
+             
+    </div>
+    </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
