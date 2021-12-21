@@ -6,4 +6,5 @@ export interface Item
     price?: number;
     logo?: string;
     marketId?: number;
+    isUpForSale?: boolean;
 }

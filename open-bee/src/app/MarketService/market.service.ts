@@ -17,7 +17,8 @@ export class MarketService {
   private items = this.apiUrl + "items"
   private itemsByUser = this.apiUrl + "items/user"
   private itemById = this.apiUrl + "items"
-  private addItem = this.apiUrl + "items/sell"
+  private addItem = this.apiUrl + "items/add"
+  private putItemUpForSaleURL = this.apiUrl + "items/sell"
 
   constructor(private http: HttpClient) { }
 
@@ -50,6 +51,16 @@ export class MarketService {
   public addItems(item: Item) : void
   {
     this.http.post(this.addItem, item).toPromise().then(data =>
+      {
+        console.log(data);
+      })
+  }
+
+  public putUpForSale(item: Item)
+  {
+    item.isUpForSale = true;
+    console.log(item);
+    this.http.patch(this.putItemUpForSaleURL, item).toPromise().then(data =>
       {
         console.log(data);
       })

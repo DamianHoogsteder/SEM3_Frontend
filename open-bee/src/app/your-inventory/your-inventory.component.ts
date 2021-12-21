@@ -54,6 +54,11 @@ export class YourInventoryComponent implements OnInit {
     this.marketService.addItems(item);
   }
 
+  putUpForSale(item: Item) : void
+  {
+    this.marketService.putUpForSale(item);
+  }
+
   openModal(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
