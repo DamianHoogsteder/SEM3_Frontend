@@ -21,7 +21,7 @@ export class MarketDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.getMarkets()
+    //this.getMarkets()
     this.getItems()
   }
 
@@ -33,6 +33,8 @@ export class MarketDetailComponent implements OnInit {
 
   getItems() : void
   {
-    this.marketService.getItems().subscribe((item: any) => this.items = item);
+    this.marketService.getItemsUpForSale().subscribe((item: any) => this.items = item);
   }
+
+
 }

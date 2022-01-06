@@ -18,6 +18,7 @@ export class MarketService {
   private itemsByUser = this.apiUrl + "items/user"
   private itemById = this.apiUrl + "items"
   private addItem = this.apiUrl + "items/add"
+  private buyItem = this.apiUrl + "items/buy"
   private putItemUpForSaleURL = this.apiUrl + "items/sell"
 
   constructor(private http: HttpClient) { }
@@ -37,6 +38,11 @@ export class MarketService {
     return this.http.get<Item[]>(this.items)
   }
 
+  getItemsUpForSale() : Observable<Item[]>
+  {
+    return this.http.get<Item[]>(this.buyItem)
+  }
+
   getItemsByUserId() : Observable<Item[]>
   {
     var tokenheader = new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
@@ -50,7 +56,8 @@ export class MarketService {
 
   public addItems(item: Item) : void
   {
-    this.http.post(this.addItem, item).toPromise().then(data =>
+    var tokenheader = new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')});
+    this.http.post(this.addItem, item, {headers : tokenheader}).toPromise().then(data =>
       {
         console.log(data);
       })

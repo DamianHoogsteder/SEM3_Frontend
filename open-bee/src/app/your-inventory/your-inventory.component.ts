@@ -43,8 +43,8 @@ export class YourInventoryComponent implements OnInit {
 
   getMarkets() : void
   {
-    //const id = 1;
-    //this.marketService.getMarketItems(id).subscribe((markets: any) => this.markets = markets);
+    const id = 1;
+    this.marketService.getMarketItems(id).subscribe((markets: any) => this.markets = markets);
   }
 
 
