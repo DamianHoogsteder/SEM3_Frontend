@@ -14,7 +14,8 @@ export class UserService {
   public apiUrl = environment.USER_API_URL;
   public userUrl = this.apiUrl + "User/Register"
   public loginUrl = this.apiUrl + "User/Login"
-  public profileUrl = this.apiUrl + "UserProfile"
+  public profileUrl = this.apiUrl + "UserProfile/Profile"
+  public getUserUrl = this.apiUrl + "UserProfile"
 
 
   constructor(private http: HttpClient) { }
@@ -44,4 +45,9 @@ export class UserService {
     return this.http.get<User>(this.profileUrl,{headers : tokenheader});  
   }
 
+  public GetUserById(id: string)
+  {
+    console.log(id)
+    return this.http.get<User>(`${this.userUrl}/${id}/`);  
+  }
 }

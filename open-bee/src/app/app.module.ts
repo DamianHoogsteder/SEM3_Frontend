@@ -15,6 +15,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { UpForSalePageComponent } from './up-for-sale-page/up-for-sale-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     UserComponent,
     LoginComponent,
     NavBarComponent,
+    UpForSalePageComponent,
   ],
   imports: [
     BrowserModule,

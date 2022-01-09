@@ -9,6 +9,7 @@ import { YourInventoryComponent } from './your-inventory/your-inventory.componen
 import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { UpForSalePageComponent } from './up-for-sale-page/up-for-sale-page.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'userProfile', component: UserComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'Login', component: LoginComponent},
+  {path: 'buy', component: UpForSalePageComponent},
 ];
 
 @NgModule({
