@@ -1,0 +1,4 @@
+.glass{
+    background: rgb(0,0,0);
+    background: radial-gradient(circle, rgba(0,0,0,0.6111578420430672) 0%, rgba(58,58,71,0) 58%, rgba(83,83,102,0) 100%, rgba(70,70,86,1) 100%, rgba(102,107,108,1) 100%); 
+}
