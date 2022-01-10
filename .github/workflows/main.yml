@@ -8,10 +8,10 @@ on:
   push:
     branches:
         - main
-    paths: [ open-bee/src/** ]
+    paths: [ open-bee/** ]
   pull_request:
     branches: [ main, Development ]
-    paths: [ open-bee/src/** ]
+    paths: [ open-bee/** ]
 
 jobs:
   build:
