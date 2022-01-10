@@ -1,0 +1,27 @@
+<header class="p-3 bg-dark text-white shadow-lg">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+            <ul class="nav col-12 col-lg-8  mb-2 justify-content-left mb-md-0">
+            <li><a routerLink="/home" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a routerLink="/buy" class="nav-link px-2 text-white">Marketplace</a></li>
+            <li><a routerLink="/sell" class="nav-link px-2 text-white">Sell</a></li>
+            <li><a routerLink="/markets" class="nav-link px-2 text-white">Showcase</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+            </ul>
+            <div class="text-right" style="margin-left: 100px;">
+                <div *ngIf="loggedIn; else elseblock">
+                    <button type="button" routerLink="/userProfile" class="btn btn-warning me-2 m-2 ms-auto">Profile</button>
+    
+                    <button type="button" routerLink="/Login" (click)="onLogOut()" class="btn btn-warning me-2 ms-auto">Logout</button>
+                </div>  
+                
+                <ng-template #elseblock class="text-end">
+                    <button type="button" routerLink="/Login" class="btn btn-warning me-2">Login</button>
+                </ng-template>  
+            </div>
+             
+        </div>       
+    </div>
+</header>
+<router-outlet></router-outlet>

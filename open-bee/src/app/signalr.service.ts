@@ -39,4 +39,9 @@ export class SignalrService {
       console.log(sometext);
     })
   }
+
+  joinGroup(groupName: string)
+  {
+    this.hubConnection.invoke("JoinGroup", groupName);
+  }
 }

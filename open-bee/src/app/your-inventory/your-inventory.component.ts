@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../item';
 import { Market } from '../market';
 import { MarketService } from '../MarketService/market.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ItemDetailComponent } from '../item-detail/item-detail.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-your-inventory',
@@ -18,16 +19,26 @@ export class YourInventoryComponent implements OnInit {
   public markets: Market[] = [];
   public closeResult = '';
   public newItem: Item = {};
+  private userId: any;
 
   constructor(
     private marketService : MarketService,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router : Router
     ) { }
 
   ngOnInit(): void {
     this.getMarkets()
-    this.getItems()
+    this.marketService.getItemsByUserId().subscribe(
+      res =>{
+        this.items = res;
+        console.log(this.userId)
+      },
+      err =>{
+        console.log(err);
+      },
+    );
   }
 
   getMarkets() : void
@@ -36,15 +47,16 @@ export class YourInventoryComponent implements OnInit {
     this.marketService.getMarketItems(id).subscribe((markets: any) => this.markets = markets);
   }
 
-  getItems() : void
-  {
-    this.marketService.getItems().subscribe((item: any) => this.items = item);
-  }
 
   addItem(item: Item) : void
   {
     console.log(item)
     this.marketService.addItems(item);
+  }
+
+  putUpForSale(item: Item) : void
+  {
+    this.marketService.putUpForSale(item);
   }
 
   openModal(content: any) {

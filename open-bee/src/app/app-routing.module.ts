@@ -6,6 +6,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MarketDetailComponent } from './market-detail/market-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { YourInventoryComponent } from './your-inventory/your-inventory.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserComponent } from './user/user.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { UpForSalePageComponent } from './up-for-sale-page/up-for-sale-page.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -13,7 +18,11 @@ const routes: Routes = [
   {path: 'home', component: DashboardComponent},
   {path: 'detail/:id', component: MarketDetailComponent},
   {path: 'item/:id', component: ItemDetailComponent},
-  {path: 'sell', component: YourInventoryComponent}
+  {path: 'sell', component: YourInventoryComponent},
+  {path: 'userProfile', component: UserComponent},
+  {path: 'registration', component: RegistrationComponent},
+  {path: 'Login', component: LoginComponent},
+  {path: 'buy', component: UpForSalePageComponent},
 ];
 
 @NgModule({

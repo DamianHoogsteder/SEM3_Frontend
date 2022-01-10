@@ -1,14 +1,12 @@
 <div class="album py-5" style="background-color: grey;">
     <div class="container" >            
-            <div *ngFor="let market of markets">
-                
                 <h1 class="text-white">Your inventory</h1>
                 <br />
                 <button class="btn btn-warning" (click)="openModal(content)">Add item</button>
                 
                 <div class="row" style="padding-top: 20px;">
                     
-                    <div *ngFor="let item of market.items" class="col-lg-4">
+                    <div *ngFor="let item of items" class="col-lg-4">
                             <div class="card shadow-sm bg-dark">
                                 <img class="bd-placeholder-img align-items-center" src="{{item.logo}}.png" alt="logo" width="100%" height="100%">
                     
@@ -16,17 +14,18 @@
                                 <p class="card-text text-white">{{item.name}}</p>
                                 <p class="text-white-50 mb-0">{{item.description}}</p>
                                 <p class="text-white-50 mb-0">$ {{item.price}}</p>
+                                <p class="text-white-50 mb-0">Is being sold: {{item.isUpForSale}}</p>
                                 <br />
                                 <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" routerLink="/item/{{item.id}}" class="btn btn-sm btn-outline-secondary text-white">View</button>
+                                    <button type="button" (click)="putUpForSale(item)" class="btn btn-sm btn-outline-secondary text-white">Put up for sale</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>  
-    </div>
 
     
     <ng-template #content let-modal >
@@ -36,38 +35,39 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body text-white" style="background-color:grey;">
-          <form>
-            <div class="form-group">
-              <label>Please enter the details about the item you want to add to your inventory.</label>
-              <hr />
-              <div class="input-group">
-                  <form ngNativeValidate #itemForm="ngForm">
-                    {{itemForm.value | json}}
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input required type="text" placeholder="Name" class="form-control" name="name"  [ngModel]="newItem.name" >
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input required placeholder="Description" type="text" class="form-control" name="description" [ngModel]="newItem.description">
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input required type="number" placeholder="Price" class="form-control" name="price" [ngModel]="newItem.price">
-                    </div>
-                    <div class="form-group">
-                        <label>Market</label>
-                        <select required class="form-control" aria-label="Default select example" name="marketId" [(ngModel)]="newItem.marketId">
-                            <option value="" disabled selected>Select a market</option>
-                            <option *ngFor="let market of markets" [ngValue]="market.id">{{market.name}}</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-warning" type="submit" (click)="addItem(itemForm.value)">Add to inventory</button>
-                  </form>
+        <div class="align-items-center d-flex justify-content-center">
+          <div class="modal-body d-flex text-center text-white" style="background-color:grey;">
+            <form>
+              <div class="form-group">
+                <label>Please enter the details about the item you want to add to your inventory.</label>
+                <hr />
+                <div class="input-group">
+                    <form ngNativeValidate #itemForm="ngForm">
+                      <div class="form-group">
+                          <label>Name</label>
+                          <input required type="text" placeholder="Name" class="form-control" name="name"  [ngModel]="newItem.name" >
+                      </div>
+                      <div class="form-group">
+                          <label>Description</label>
+                          <input required placeholder="Description" type="text" class="form-control" name="description" [ngModel]="newItem.description">
+                      </div>
+                      <div class="form-group">
+                          <label>Price</label>
+                          <input required type="number" placeholder="Price" class="form-control" name="price" [ngModel]="newItem.price">
+                      </div>
+                      <div class="form-group">
+                          <label>Market</label>
+                          <select required class="form-control" aria-label="Default select example" name="marketId" [(ngModel)]="newItem.marketId">
+                              <option value="" disabled selected>Select a market</option>
+                              <option *ngFor="let market of markets" [ngValue]="market.id">{{market.name}}</option>
+                          </select>
+                      </div>
+                      <button class="btn btn-warning" type="submit" (click)="addItem(itemForm.value)">Add to inventory</button>
+                    </form>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </ng-template>
       

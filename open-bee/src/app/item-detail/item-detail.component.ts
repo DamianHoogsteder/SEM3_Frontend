@@ -5,6 +5,8 @@ import { Item } from '../item';
 import { MarketService } from '../MarketService/market.service';
 import { SignalrService } from '../signalr.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../Services/user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-item-detail',
@@ -13,32 +15,57 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ItemDetailComponent implements OnInit {
 
-  item?: Item;
+  item: Item = {};
+  items: Item[] = [];
   tradeOffer?: String;
   closeResult = '';
+  userId: any;
+  user: any;
 
   constructor(
     private marketService : MarketService,
+    private userService : UserService,
     private route: ActivatedRoute,
     private signalrService: SignalrService,
     private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    
     this.getItemById()
+    this.getUserInvetory()
+    this.signalrService.startConnection()
   }
 
   
+  getUserInvetory() : void
+  {
+    this.marketService.getItemsByUserId().subscribe(
+      res =>{
+        this.items = res;
+        console.log(this.userId)
+      },
+      err =>{
+        console.log(err);
+      },
+    );
+  }
+
   getItemById() : void
   {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-
-    this.marketService.getItemById(id).subscribe(items => this.item = items);
+    this.marketService.getItemById(id).subscribe(items => {this.item = items; this.GetUserById(this.item.userId)}); 
+    
+    
   }
 
-  sendTradeOffer()
+  GetUserById(id: any) : void
   {
+   this.userService.GetUserById(id).subscribe((user: any) => this.user = user);
+  }
+
+  sendTradeOffer(groupName: string)
+  {
+    this.signalrService.joinGroup(groupName);
       setTimeout(() => {
         this.signalrService.askServerListener();
         this.signalrService.askServer();
