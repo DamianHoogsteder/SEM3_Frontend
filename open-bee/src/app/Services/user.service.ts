@@ -47,7 +47,7 @@ export class UserService {
 
   public GetUserById(id: string)
   {
-    console.log(id)
-    return this.http.get<User>(`${this.userUrl}/${id}/`);  
+    console.log(`${this.getUserUrl}/${id}/`)
+    return this.http.get<User>(`${this.getUserUrl}/${id}/`);  
   }
 }

@@ -42,6 +42,6 @@ export class MarketDetailComponent implements OnInit {
 
   GetUserById(id: any) : void
   {
-    this.userService.GetUserById(id);
+   this.userService.GetUserById(id).subscribe((user: any) => this.user = user);
   }
 }
