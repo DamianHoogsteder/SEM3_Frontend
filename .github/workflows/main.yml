@@ -6,11 +6,11 @@ name: CD-docker
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ Login-and-registration, Development]
-    paths: [ open-bee/** ]
+    branches: [ Login-and-registration, Development, main]
+    paths: [ SEM3_Frontend/** ]
   pull_request:
     branches: [ main, Development ]
-    paths: [ open-bee/** ]
+    paths: [ SEM3_Frontend/** ]
 
 jobs:
   build:
