@@ -15,18 +15,20 @@ import { User } from '../user';
 })
 export class ItemDetailComponent implements OnInit {
 
-  item: Item = {};
-  items: Item[] = [];
-  tradeOffer?: String;
-  closeResult = '';
-  userId: any;
-  user: any;
+  //Fields
+  public item: Item = {};
+  public items: Item[] = [];
+  public tradeOffer?: any;
+  public closeResult = '';
+  public userId: any;
+  public user: any;
+  public userDetails: any;
 
   constructor(
     private marketService : MarketService,
     private userService : UserService,
     private route: ActivatedRoute,
-    private signalrService: SignalrService,
+    public signalrService: SignalrService,
     private modalService: NgbModal
   ) { }
 
@@ -42,19 +44,26 @@ export class ItemDetailComponent implements OnInit {
     this.marketService.getItemsByUserId().subscribe(
       res =>{
         this.items = res;
-        console.log(this.userId)
       },
       err =>{
         console.log(err);
       },
     );
+
+    this.userService.GetUserProfile().subscribe(
+      res =>{
+        this.userDetails = res;
+      },
+      err =>{
+        console.log(err);
+      },
+    )
   }
 
   getItemById() : void
   {
     const id = Number(this.route.snapshot.paramMap.get('id'))
     this.marketService.getItemById(id).subscribe(items => {this.item = items; this.GetUserById(this.item.userId)}); 
-    
     
   }
 
@@ -63,12 +72,23 @@ export class ItemDetailComponent implements OnInit {
    this.userService.GetUserById(id).subscribe((user: any) => this.user = user);
   }
 
-  sendTradeOffer(groupName: string)
+  sendTradeOffer(name: string)
   {
-    this.signalrService.joinGroup(groupName);
+    this.signalrService.startConnection()
+    this.signalrService.joinGroup(name);
       setTimeout(() => {
         this.signalrService.askServerListener();
-        this.signalrService.askServer();
+        this.signalrService.askServer(name, null);
+      }, 2000); 
+  }
+
+  offerTradeItem(username: string, itemname: any) 
+  {
+    this.signalrService.startConnection()
+    
+      setTimeout(() => {
+        this.signalrService.askServerListener();
+        this.signalrService.askServer(username, itemname);
       }, 2000); 
   }
 
