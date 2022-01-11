@@ -59,7 +59,7 @@
                           <label>Market</label>
                           <select required class="form-control" aria-label="Default select example" name="marketId" [(ngModel)]="newItem.marketId">
                               <option value="" disabled selected>Select a market</option>
-                              <option *ngFor="let market of markets" [ngValue]="market.id">{{market.name}}</option>
+                              <option name="market" *ngFor="let market of markets" [ngValue]="market.id">{{market.name}}</option>
                           </select>
                       </div>
                       <button class="btn btn-warning" type="submit" (click)="addItem(itemForm.value)">Add to inventory</button>
