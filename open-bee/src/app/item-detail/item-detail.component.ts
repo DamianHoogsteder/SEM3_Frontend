@@ -16,7 +16,8 @@ import { User } from '../user';
 export class ItemDetailComponent implements OnInit {
 
   //Fields
-  public item: Item = {};
+  public currentItem: Item = {};
+  public offeredItem: Item = {};
   public items: Item[] = [];
   public tradeOffer?: any;
   public closeResult = '';
@@ -33,9 +34,12 @@ export class ItemDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.signalrService.startConnection()
+    setTimeout(() => {
+      this.signalrService.askServerListener();
+    }, 2000); 
     this.getItemById()
     this.getUserInvetory()
-    this.signalrService.startConnection()
   }
 
   
@@ -63,8 +67,7 @@ export class ItemDetailComponent implements OnInit {
   getItemById() : void
   {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.marketService.getItemById(id).subscribe(items => {this.item = items; this.GetUserById(this.item.userId)}); 
-    
+    this.marketService.getItemById(id).subscribe(items => {this.currentItem = items; this.GetUserById(this.currentItem.userId)}); 
   }
 
   GetUserById(id: any) : void
@@ -75,23 +78,25 @@ export class ItemDetailComponent implements OnInit {
   sendTradeOffer(name: string)
   {
     this.signalrService.startConnection()
-    this.signalrService.joinGroup(name);
       setTimeout(() => {
         this.signalrService.askServerListener();
         this.signalrService.askServer(name, null);
       }, 2000); 
   }
 
-  offerTradeItem(username: string, itemname: any) 
+  offerTradeItem(username: string, item: Item) 
   {
+    this.offeredItem = item;
     this.signalrService.startConnection()
     
       setTimeout(() => {
         this.signalrService.askServerListener();
-        this.signalrService.askServer(username, itemname);
+        this.signalrService.askServer(username, item.name);
       }, 2000); 
   }
 
+
+  //Modal controls
   openModal(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
