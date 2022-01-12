@@ -30,13 +30,13 @@
 </div>
 
 <ng-template #content let-modal>
-    <div class="modal-header modal-lg">
-      <h4 class="modal-title" id="modal-basic-title">Choose either an item or amount you want to offer</h4>
+    <div class="modal-header modal-lg bg-dark">
+      <h4 class="modal-title text-white" id="modal-basic-title">Choose either an item or amount you want to offer</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body bg-secondary">
       <form>
         <div class="form-group">
           <label for="dateOfBirth">Your inventory</label>
@@ -69,13 +69,10 @@
     </div>
     </form>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
   </ng-template>
 
   <ng-template #AcceptTrade let-modal>
-    <div class="modal-header modal-lg">
+    <div class="modal-header modal-lg bg-dark">
       <h4 class="modal-title" id="modal-basic-title">Are you sure you want to accept this trade?</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
