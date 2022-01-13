@@ -5,6 +5,6 @@ services:
     ports:
       - "8000:4200" # specify port forewarding
   backend: # name of the third service
-    image: onboardi/taxmodelbackend:latest # specify image to build container from
+    image: zephtos/MarketService:latest # specify image to build container from
     ports:
-      - "44329:80" #specify ports forewarding
+      - "44358:80" #specify ports forewarding
