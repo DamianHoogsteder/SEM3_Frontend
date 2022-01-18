@@ -8,7 +8,6 @@ on:
   push:
     branches:
         - main
-    paths: [ open-bee/**, workflows/** ]
   pull_request:
     branches: [ main, Development ]
     paths: [ open-bee/** ]
