@@ -7,5 +7,5 @@ COPY package.json /app
 RUN npm install
 COPY . /app
 RUN npm run build
-RUN chmod +X /open-bee/entrypoint.sh
-ENTRYPOINT ["/open-bee/entrypoint.sh"]
+RUN chmod +X /app/entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
