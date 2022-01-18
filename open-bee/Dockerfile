@@ -6,6 +6,6 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-RUN chmod a+rwx /app/entrypoint.sh
+RUN ["chmod", "+x", "/app/docker-entrypoint.sh"]
 RUN npm run build
 ENTRYPOINT ["/app/entrypoint.sh"]
