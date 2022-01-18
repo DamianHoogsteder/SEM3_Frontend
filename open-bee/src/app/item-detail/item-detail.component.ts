@@ -15,25 +15,31 @@ import { User } from '../user';
 })
 export class ItemDetailComponent implements OnInit {
 
-  item: Item = {};
-  items: Item[] = [];
-  tradeOffer?: String;
-  closeResult = '';
-  userId: any;
-  user: any;
+  //Fields
+  public currentItem: Item = {};
+  public offeredItem: Item = {};
+  public items: Item[] = [];
+  public tradeOffer?: any;
+  public closeResult = '';
+  public userId: any;
+  public user: any;
+  public userDetails: any;
 
   constructor(
     private marketService : MarketService,
     private userService : UserService,
     private route: ActivatedRoute,
-    private signalrService: SignalrService,
+    public signalrService: SignalrService,
     private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
+    this.signalrService.startConnection()
+    setTimeout(() => {
+      this.signalrService.askServerListener();
+    }, 2000); 
     this.getItemById()
     this.getUserInvetory()
-    this.signalrService.startConnection()
   }
 
   
@@ -42,20 +48,26 @@ export class ItemDetailComponent implements OnInit {
     this.marketService.getItemsByUserId().subscribe(
       res =>{
         this.items = res;
-        console.log(this.userId)
       },
       err =>{
         console.log(err);
       },
     );
+
+    this.userService.GetUserProfile().subscribe(
+      res =>{
+        this.userDetails = res;
+      },
+      err =>{
+        console.log(err);
+      },
+    )
   }
 
   getItemById() : void
   {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.marketService.getItemById(id).subscribe(items => {this.item = items; this.GetUserById(this.item.userId)}); 
-    
-    
+    this.marketService.getItemById(id).subscribe(items => {this.currentItem = items; this.GetUserById(this.currentItem.userId)}); 
   }
 
   GetUserById(id: any) : void
@@ -63,15 +75,28 @@ export class ItemDetailComponent implements OnInit {
    this.userService.GetUserById(id).subscribe((user: any) => this.user = user);
   }
 
-  sendTradeOffer(groupName: string)
+  sendTradeOffer(name: string)
   {
-    this.signalrService.joinGroup(groupName);
+    this.signalrService.startConnection()
       setTimeout(() => {
         this.signalrService.askServerListener();
-        this.signalrService.askServer();
+        this.signalrService.askServer(name, null);
       }, 2000); 
   }
 
+  offerTradeItem(username: string, item: Item) 
+  {
+    this.offeredItem = item;
+    this.signalrService.startConnection()
+    
+      setTimeout(() => {
+        this.signalrService.askServerListener();
+        this.signalrService.askServer(username, item.name);
+      }, 2000); 
+  }
+
+
+  //Modal controls
   openModal(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

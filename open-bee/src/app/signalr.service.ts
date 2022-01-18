@@ -28,8 +28,8 @@ export class SignalrService {
 
   }
 
-  askServer() {
-    this.hubConnection.invoke("askServer", "zephtos")
+  askServer(name: string, itemname: any) {
+    this.hubConnection.invoke("askServer", name, itemname)
       .catch(err => console.log(err));
   }
 

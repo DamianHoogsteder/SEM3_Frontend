@@ -8,9 +8,8 @@
                     
                     <div *ngFor="let item of items" class="col-lg-4">
                             <div class="card shadow-sm bg-dark">
-                                <img class="bd-placeholder-img align-items-center" src="{{item.logo}}.png" alt="logo" width="100%" height="100%">
-                    
-                            <div class="card-body">
+                                <img class="bd-placeholder-img align-items-center" src="{{item.logo}}.png" alt="logo" height="400px">
+                            <div class="card-body align-items-stretch" >
                                 <p class="card-text text-white">{{item.name}}</p>
                                 <p class="text-white-50 mb-0">{{item.description}}</p>
                                 <p class="text-white-50 mb-0">$ {{item.price}}</p>
@@ -59,10 +58,10 @@
                           <label>Market</label>
                           <select required class="form-control" aria-label="Default select example" name="marketId" [(ngModel)]="newItem.marketId">
                               <option value="" disabled selected>Select a market</option>
-                              <option *ngFor="let market of markets" [ngValue]="market.id">{{market.name}}</option>
+                              <option name="market" *ngFor="let market of markets" [ngValue]="market.id">{{market.name}}</option>
                           </select>
                       </div>
-                      <button class="btn btn-warning" type="submit" (click)="addItem(itemForm.value)">Add to inventory</button>
+                      <button class="btn btn-warning" type="submit" (click)="addItem(itemForm.value)" (click)="modal.close('save click')">Add to inventory</button>
                     </form>
                 </div>
               </div>
